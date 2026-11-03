@@ -1,0 +1,8 @@
+[client]
+# Disables the CSV-download / clipboard-copy affordance on every
+# st.dataframe table in the app, per the confirmed interface refinement
+# ("don't give download possibilities"). Chart-level download (the Plotly
+# modebar's camera/"download as png" icon) is removed per-chart instead,
+# via the config={'modeBarButtonsToRemove': ['toImage']} argument passed
+# to every st.plotly_chart call -- see map_utils.NO_DOWNLOAD_CONFIG.
+disableDataExport = true

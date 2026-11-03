@@ -1,0 +1,361 @@
+{
+  "pillar": "Reliability (County Reliability Index, CRI)",
+  "generated": "2026-10-28",
+  "history_years": [
+    2013,
+    2025
+  ],
+  "latest_data_year": 2025,
+  "forecast_years": [
+    2026,
+    2027,
+    2028
+  ],
+  "cri_definition": "CRI = 0.5 x pooled percentile(SAIDI) + 0.5 x pooled percentile(SAIFI), pooled over all 2013-2025 county-years; 0 = most reliable, 100 = least reliable. SAIDI/SAIFI include major event days; customer-weighted county allocation of utility-level EIA Form 861 data.",
+  "tiers": [
+    "Very Low",
+    "Low",
+    "Moderate",
+    "High",
+    "Very High"
+  ],
+  "tier_edges_cri": [
+    0.0,
+    21.2,
+    41.28,
+    60.41,
+    79.14,
+    100.0
+  ],
+  "method": "Projected CRI = county recent level (mean of last 5 observed years) + national within-county trend x (year - mid-year of those 5 years). Selected by rolling-origin backtest (origins 2016-2024, 1-3 years ahead) over Sen slope continuation, Sen if Mann-Kendall significant, own AR(1), own average, last value, all-years level + trend.",
+  "national_trend_cri_pts_per_year": 0.984,
+  "national_trend_90ci_state_bootstrap": [
+    0.724,
+    1.25
+  ],
+  "band_app": "68%, symmetric (average of empirical lower/upper backtest deviations), clipped to 0-100",
+  "band_halfwidth_sd_units": {
+    "1": 1.265,
+    "2": 1.28,
+    "3": 1.331
+  },
+  "band90_halfwidth_sd_units": {
+    "1": 2.226,
+    "2": 2.236,
+    "3": 2.309
+  },
+  "band_coverage_leave_one_origin_out": [
+    {
+      "h": 1,
+      "Coverage68_%": 67.9,
+      "Coverage90_%": 90.0
+    },
+    {
+      "h": 2,
+      "Coverage68_%": 67.4,
+      "Coverage90_%": 90.4
+    },
+    {
+      "h": 3,
+      "Coverage68_%": 67.2,
+      "Coverage90_%": 89.9
+    }
+  ],
+  "backtest_mae_cri_points": [
+    {
+      "Method": "recent level + national trend",
+      "MAE_1yr": 15.8,
+      "MAE_2yr": 15.61,
+      "MAE_3yr": 15.89,
+      "Bias_1yr": 0.77,
+      "Bias_2yr": 1.49,
+      "Bias_3yr": 2.01
+    },
+    {
+      "Method": "all-years level + national trend",
+      "MAE_1yr": 15.75,
+      "MAE_2yr": 15.79,
+      "MAE_3yr": 15.98,
+      "Bias_1yr": 0.72,
+      "Bias_2yr": 1.44,
+      "Bias_3yr": 1.97
+    },
+    {
+      "Method": "own average",
+      "MAE_1yr": 15.98,
+      "MAE_2yr": 16.15,
+      "MAE_3yr": 16.46,
+      "Bias_1yr": -4.79,
+      "Bias_2yr": -5.17,
+      "Bias_3yr": -5.96
+    },
+    {
+      "Method": "own AR(1)",
+      "MAE_1yr": 16.51,
+      "MAE_2yr": 16.15,
+      "MAE_3yr": 16.51,
+      "Bias_1yr": -4.33,
+      "Bias_2yr": -4.22,
+      "Bias_3yr": -5.82
+    },
+    {
+      "Method": "Sen's if MK significant",
+      "MAE_1yr": 16.35,
+      "MAE_2yr": 16.72,
+      "MAE_3yr": 17.25,
+      "Bias_1yr": -4.99,
+      "Bias_2yr": -5.34,
+      "Bias_3yr": -6.12
+    },
+    {
+      "Method": "last value",
+      "MAE_1yr": 19.05,
+      "MAE_2yr": 18.7,
+      "MAE_3yr": 19.06,
+      "Bias_1yr": -0.73,
+      "Bias_2yr": -1.68,
+      "Bias_3yr": -2.25
+    },
+    {
+      "Method": "Sen's continuation",
+      "MAE_1yr": 17.9,
+      "MAE_2yr": 19.45,
+      "MAE_3yr": 21.52,
+      "Bias_1yr": -0.54,
+      "Bias_2yr": -0.06,
+      "Bias_3yr": 0.08
+    }
+  ],
+  "n_counties_panel": 3045,
+  "n_counties_projected": 3005,
+  "n_counties_not_projected": 40,
+  "limited_history_threshold_years": 8,
+  "not_projected_values": "No projection or placeholder is exported for these counties.",
+  "strict_validation": {
+    "design": "CRI rebuilt at each origin from raw SAIDI/SAIFI using only data <= origin; level window chosen on targets <= 2020; final test on origins 2020-2024 (targets 2021-2025), never used for selection.",
+    "rebuild_max_abs_diff_vs_cell7": 0.01,
+    "window_selected_on_selection_period": "EWMA(0.3) level + national trend",
+    "production_method": "recent 5-yr level + national trend",
+    "test_mae_rmse_bias_by_method": [
+      {
+        "Method": "recent 7-yr level + national trend",
+        "MAE": 15.229,
+        "RMSE": 19.339,
+        "Bias_projection_minus_actual": 2.442,
+        "N": 35674.0
+      },
+      {
+        "Method": "recent 5-yr level + national trend",
+        "MAE": 15.403,
+        "RMSE": 19.674,
+        "Bias_projection_minus_actual": 2.44,
+        "N": 35674.0
+      },
+      {
+        "Method": "EWMA(0.3) level + national trend",
+        "MAE": 15.405,
+        "RMSE": 19.656,
+        "Bias_projection_minus_actual": 2.153,
+        "N": 35674.0
+      },
+      {
+        "Method": "all-years level + national trend",
+        "MAE": 15.518,
+        "RMSE": 19.59,
+        "Bias_projection_minus_actual": 2.31,
+        "N": 35674.0
+      },
+      {
+        "Method": "all-years level + regional trend",
+        "MAE": 15.608,
+        "RMSE": 20.028,
+        "Bias_projection_minus_actual": 2.237,
+        "N": 35674.0
+      },
+      {
+        "Method": "recent 5-yr level + regional trend",
+        "MAE": 15.682,
+        "RMSE": 20.123,
+        "Bias_projection_minus_actual": 2.403,
+        "N": 35674.0
+      },
+      {
+        "Method": "own average",
+        "MAE": 15.927,
+        "RMSE": 20.058,
+        "Bias_projection_minus_actual": -5.044,
+        "N": 35674.0
+      },
+      {
+        "Method": "own AR(1)",
+        "MAE": 15.956,
+        "RMSE": 20.263,
+        "Bias_projection_minus_actual": -4.496,
+        "N": 35674.0
+      },
+      {
+        "Method": "recent 3-yr level + national trend",
+        "MAE": 16.024,
+        "RMSE": 20.637,
+        "Bias_projection_minus_actual": 1.912,
+        "N": 35674.0
+      },
+      {
+        "Method": "EWMA(0.5) level + national trend",
+        "MAE": 16.078,
+        "RMSE": 20.778,
+        "Bias_projection_minus_actual": 1.904,
+        "N": 35674.0
+      },
+      {
+        "Method": "county OLS trend",
+        "MAE": 17.478,
+        "RMSE": 22.724,
+        "Bias_projection_minus_actual": 2.261,
+        "N": 35674.0
+      },
+      {
+        "Method": "county Sen's trend",
+        "MAE": 17.701,
+        "RMSE": 23.39,
+        "Bias_projection_minus_actual": 0.618,
+        "N": 35674.0
+      },
+      {
+        "Method": "last value",
+        "MAE": 19.464,
+        "RMSE": 25.895,
+        "Bias_projection_minus_actual": -0.764,
+        "N": 35674.0
+      }
+    ],
+    "test_mae_by_region_production": [
+      {
+        "Region": "Midwest",
+        "MAE": 15.15,
+        "Bias_projection_minus_actual": 1.504,
+        "N": 11838.0
+      },
+      {
+        "Region": "Northeast",
+        "MAE": 14.405,
+        "Bias_projection_minus_actual": 8.044,
+        "N": 2592.0
+      },
+      {
+        "Region": "South",
+        "MAE": 15.003,
+        "Bias_projection_minus_actual": 1.906,
+        "N": 16552.0
+      },
+      {
+        "Region": "West",
+        "MAE": 18.004,
+        "Bias_projection_minus_actual": 3.592,
+        "N": 4692.0
+      }
+    ],
+    "band68_test_coverage": [
+      {
+        "h": 1,
+        "Half_width_sd": 1.337,
+        "Coverage68_all_%": 74.0,
+        "Coverage68_Midwest_%": 74.8,
+        "Coverage68_Northeast_%": 81.6,
+        "Coverage68_South_%": 71.2,
+        "Coverage68_West_%": 77.8
+      },
+      {
+        "h": 2,
+        "Half_width_sd": 1.394,
+        "Coverage68_all_%": 76.0,
+        "Coverage68_Midwest_%": 74.0,
+        "Coverage68_Northeast_%": 78.1,
+        "Coverage68_South_%": 78.8,
+        "Coverage68_West_%": 70.1
+      },
+      {
+        "h": 3,
+        "Half_width_sd": 1.38,
+        "Coverage68_all_%": 72.9,
+        "Coverage68_Midwest_%": 72.4,
+        "Coverage68_Northeast_%": 72.1,
+        "Coverage68_South_%": 76.0,
+        "Coverage68_West_%": 64.0
+      }
+    ]
+  },
+  "disclosures": [
+    "Method choice: projections combine each county's own recent level with one national trend. In a strict out-of-time test (2021-2025 targets, no future data) this family had a mean absolute error of 15.2-16.1 CRI points, versus 17.5 for per-county linear trends, 17.7 for per-county Sen's slope and 19.5 for the last observed value.",
+    "Window sensitivity: the level window (3, 5, 7 years, all years, or weighted) changes the test error by at most 0.8 points; the 5-year window is used.",
+    "Over-projection: in the 2021-2025 test, projections were on average +2.4 CRI points above observed values, because the national trend slowed (from 1.56 points/yr at the 2020 origin to 1.08 at the 2024 origin).",
+    "Regional accuracy: the West is least predictable (test error 18.0 points vs 14.4-15.1 elsewhere; 3-year 68% band covered 64% of Western outcomes vs 72-76% elsewhere). Region-specific trends were tested and did not improve accuracy.",
+    "Band: the 68% band covered 73-76% of outcomes in the strict test (slightly conservative).",
+    "Latest-year coverage: 15 counties with 2024 data have no 2025 value (11 because their reporting utility filed no 2025 reliability data with EIA; 4 because the reporting utility did not list the county in its 2025 service territory). They are still projected from their recent years and show no 2025 value on the map.",
+    "Population weights: ACS 5-year vintages used by year: 2025->2024 (the ACS 5-year release for a newer year was not yet available).",
+    "Scope: the projection is a statistical reliability-risk index (relative to 2013-2025 county-years), not a prediction of actual outages, available capacity, or outage probability at a specific site. It cannot anticipate individual storms, utility investments or other events that change a county's trajectory."
+  ],
+  "latest_year_gaps": {
+    "n": 15,
+    "no_eia_filing": 11,
+    "not_matched": 4,
+    "file": "county_cri_latest_year_gaps.csv",
+    "popup_text": "No <latest year> data -- see Reason in county_cri_latest_year_gaps.csv"
+  },
+  "name_rescue": [],
+  "acs_vintage_used": {
+    "2013": 2013,
+    "2014": 2014,
+    "2015": 2015,
+    "2016": 2016,
+    "2017": 2017,
+    "2018": 2018,
+    "2019": 2019,
+    "2020": 2020,
+    "2021": 2021,
+    "2022": 2022,
+    "2023": 2023,
+    "2024": 2024,
+    "2025": 2024
+  },
+  "ceiling": {
+    "meaning": "CRI 100 = worse than every U.S. county-year observed 2013-2025. Raw projections above 100 are exported as 100 with Capped_At_100 = True and shown as \"99+\".",
+    "n_capped_by_year": {
+      "2026": 0,
+      "2027": 3,
+      "2028": 38
+    }
+  },
+  "app_display": {
+    "map": "Continuous CRI 0-100, fixed range for all years 2013-2028, OrRd sequential scale (light = most reliable, dark red = least reliable). No discrete-tier toggle. Observed years: CRI; projected years 2026-2028: Projected_CRI, map labelled \"Projected\". Optional: mark tier_edges_cri on the colour bar.",
+    "popup_observed_years": [
+      "County, State",
+      "CRI (0-100)",
+      "Risk level = CRI_Tier",
+      "More reliable than <Pct_Counties_Less_Reliable_SameYear>% of U.S. counties in <Year>",
+      "SAIDI (min/customer) vs National_Median_SAIDI_SameYear",
+      "SAIFI (interruptions/customer) vs National_Median_SAIFI_SameYear",
+      "Reporting utilities = Reporting_Utilities"
+    ],
+    "popup_observed_latest_year_without_data": "Counties listed in county_cri_latest_year_gaps.csv: show \"No <latest year> data\" plus the Reason column.",
+    "popup_projected_years": [
+      "Headline = Popup_Headline (risk level first, then the likely range)",
+      "County, State",
+      "Projected CRI = CRI_Display (\"99+\" when capped)",
+      "Projected risk level = Projected_Tier",
+      "Likely range (68%) = Range_68_Display",
+      "Chance of High or Very High = P_High_or_VeryHigh",
+      "History_Flag when not \"OK\""
+    ],
+    "do_not_show": [
+      "confidence grade",
+      "number of reporting utilities",
+      "trend label",
+      "Projected_CRI_Raw (kept for audit only)"
+    ],
+    "county_search": "Selecting a county from search opens the same popup/detail panel as clicking it.",
+    "chart_caption": "The likely range is wide from the first projected year because a county's reliability varies a lot from year to year, including major-event outages such as storms. It widens only slightly over time because a bad year does not carry into the next.",
+    "chart_hover_projected": "<Year>: <CRI_Display> (likely range <Range_68_Display>)"
+  },
+  "fips_note": "Zero-padded 5-char strings. Connecticut uses 2022+ planning-region FIPS (09110, 09130, 09140, 09150, 09160, 09180, 09190); 09120 and 09170 have no CRI."
+}
